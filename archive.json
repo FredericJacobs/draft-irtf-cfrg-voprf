@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-05T00:37:22.673662+00:00",
+  "timestamp": "2021-08-19T00:31:17.258742+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -19187,6 +19187,32 @@
       "mergeCommit": {
         "oid": "099a273035b794da780e4e132385c399bac8876c"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 265,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzE1NDEyMzY5",
+      "title": "Flatten metadata and cast it as auxiliary \"info\".",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/265",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We need to do a pass over the introduction and abstract, as we're no longer building a OPRF/VOPRF, but rather a POPRF/VPOPRF(?).\r\n\r\ncc @armfazh, @alxdavids ",
+      "createdAt": "2021-08-18T20:59:37Z",
+      "updatedAt": "2021-08-18T22:02:00Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "66346b0a2bd6897d411e92889d7a59b092efac1c",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/flatten-info",
+      "headRefOid": "721b62b7ed096af6fff8945907b89a19c99e9d88",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
