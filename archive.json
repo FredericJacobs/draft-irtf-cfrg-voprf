@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-19T00:31:17.258742+00:00",
+  "timestamp": "2021-08-24T00:34:17.482748+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -19202,7 +19202,7 @@
       "labels": [],
       "body": "We need to do a pass over the introduction and abstract, as we're no longer building a OPRF/VOPRF, but rather a POPRF/VPOPRF(?).\r\n\r\ncc @armfazh, @alxdavids ",
       "createdAt": "2021-08-18T20:59:37Z",
-      "updatedAt": "2021-08-18T22:02:00Z",
+      "updatedAt": "2021-08-23T21:37:41Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "66346b0a2bd6897d411e92889d7a59b092efac1c",
@@ -19213,7 +19213,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ACK, on my list for reviewing.",
+          "createdAt": "2021-08-23T21:37:41Z",
+          "updatedAt": "2021-08-23T21:37:41Z"
+        }
+      ],
       "reviews": []
     }
   ]
