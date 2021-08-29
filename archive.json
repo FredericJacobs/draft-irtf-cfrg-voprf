@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-24T00:34:17.482748+00:00",
+  "timestamp": "2021-08-29T00:38:59.679219+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -19195,24 +19195,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzE1NDEyMzY5",
       "title": "Flatten metadata and cast it as auxiliary \"info\".",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/265",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "We need to do a pass over the introduction and abstract, as we're no longer building a OPRF/VOPRF, but rather a POPRF/VPOPRF(?).\r\n\r\ncc @armfazh, @alxdavids ",
       "createdAt": "2021-08-18T20:59:37Z",
-      "updatedAt": "2021-08-23T21:37:41Z",
+      "updatedAt": "2021-08-27T17:35:11Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "66346b0a2bd6897d411e92889d7a59b092efac1c",
       "headRepository": "cfrg/draft-irtf-cfrg-voprf",
       "headRefName": "caw/flatten-info",
-      "headRefOid": "721b62b7ed096af6fff8945907b89a19c99e9d88",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "def30459fdb1519ce376aabc67544e5f9f73e0a2",
+      "closedAt": "2021-08-27T17:35:11Z",
+      "mergedAt": "2021-08-27T17:35:11Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "33ef3665d25b27c1a4e9c706076f56a8d6cccaba"
+      },
       "comments": [
         {
           "author": "armfazh",
@@ -19220,9 +19222,153 @@
           "body": "ACK, on my list for reviewing.",
           "createdAt": "2021-08-23T21:37:41Z",
           "updatedAt": "2021-08-23T21:37:41Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@armfazh all comments addressed! Please have another look.",
+          "createdAt": "2021-08-27T16:10:01Z",
+          "updatedAt": "2021-08-27T16:10:01Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQwMTY2MzA0",
+          "commit": {
+            "abbreviatedOid": "721b62b"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "some few nits, but ok in general",
+          "createdAt": "2021-08-27T06:01:08Z",
+          "updatedAt": "2021-08-27T06:18:00Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "what about to borrow the term additional data from AEAD, instead of info? ",
+              "createdAt": "2021-08-27T06:01:09Z",
+              "updatedAt": "2021-08-27T06:18:00Z"
+            },
+            {
+              "originalPosition": 41,
+              "body": "s/output/y/",
+              "createdAt": "2021-08-27T06:05:17Z",
+              "updatedAt": "2021-08-27T06:18:00Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\ncomputes the (V)OPRF evaluation in `Evaluate` over the client's blinded token,\r\n```\r\n\r\ntoken or element?",
+              "createdAt": "2021-08-27T06:06:42Z",
+              "updatedAt": "2021-08-27T06:18:00Z"
+            },
+            {
+              "originalPosition": 281,
+              "body": "```suggestion\r\n- \"Input\": The private client input, an opaque byte string.\r\n```\r\n\r\nuniformize the term private vs secret",
+              "createdAt": "2021-08-27T06:13:38Z",
+              "updatedAt": "2021-08-27T06:18:00Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "align this line to the right",
+              "createdAt": "2021-08-27T06:16:54Z",
+              "updatedAt": "2021-08-27T06:18:00Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n                             evaluatedElement, proof\r\n```",
+              "createdAt": "2021-08-27T06:17:14Z",
+              "updatedAt": "2021-08-27T06:18:00Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQwNjgyNjA1",
+          "commit": {
+            "abbreviatedOid": "84cbb4d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-08-27T16:09:44Z",
+          "updatedAt": "2021-08-27T16:09:45Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Eh, I think `info` is more appropriate here. ",
+              "createdAt": "2021-08-27T16:09:45Z",
+              "updatedAt": "2021-08-27T16:09:45Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQwNzIzOTEy",
+          "commit": {
+            "abbreviatedOid": "84cbb4d"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-08-27T17:00:42Z",
+          "updatedAt": "2021-08-27T17:00:42Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "in this case, there are asymmetric keys, so they must be public key and private key.\r\n\r\n\r\n",
+              "createdAt": "2021-08-27T17:00:42Z",
+              "updatedAt": "2021-08-27T17:00:42Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQwNzI3NjA3",
+          "commit": {
+            "abbreviatedOid": "84cbb4d"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "thinking out loud: \r\nA user can have a key in secret, which is slightly different from a user having a secret key (usually assumed to be a key for symmetric encryption) vs a private key (a key that has its correspondent public key).\r\n",
+          "createdAt": "2021-08-27T17:05:34Z",
+          "updatedAt": "2021-08-27T17:05:34Z",
+          "comments": []
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQwNzI4NTcx",
+          "commit": {
+            "abbreviatedOid": "84cbb4d"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-08-27T17:06:53Z",
+          "updatedAt": "2021-08-27T17:06:54Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I do not feel strongly about secret vs private. I'll change to private.",
+              "createdAt": "2021-08-27T17:06:53Z",
+              "updatedAt": "2021-08-27T17:06:54Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzQwNzMxNjA3",
+          "commit": {
+            "abbreviatedOid": "def3045"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-08-27T17:10:51Z",
+          "updatedAt": "2021-08-27T17:10:51Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
