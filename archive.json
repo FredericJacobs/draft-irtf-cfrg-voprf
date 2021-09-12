@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-08-29T00:38:59.679219+00:00",
+  "timestamp": "2021-09-12T00:39:33.920539+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3770,6 +3770,22 @@
           "updatedAt": "2021-07-07T19:11:13Z"
         }
       ]
+    },
+    {
+      "number": 266,
+      "id": "MDU6SXNzdWU5OTMzNzUxOTc=",
+      "title": "OPRF(P-384, SHA-512) vs OPRF(P-384, SHA-384)",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/266",
+      "state": "OPEN",
+      "author": "FredericJacobs",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Is there a compelling reason to use SHA-512 with P-384 as opposed to matching P-384 with SHA-384 like is commonly done for ECDSA signatures for instance? The number theoretical assumptions for ECVOPRF with P-384 make it such that you get below 192-bit of security, so is it warranted to require SHA-512 over SHA-384?",
+      "createdAt": "2021-09-10T16:06:55Z",
+      "updatedAt": "2021-09-10T16:06:55Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
