@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-12T00:39:33.920539+00:00",
+  "timestamp": "2021-09-14T00:39:42.122675+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3783,7 +3783,191 @@
       "labels": [],
       "body": "Is there a compelling reason to use SHA-512 with P-384 as opposed to matching P-384 with SHA-384 like is commonly done for ECDSA signatures for instance? The number theoretical assumptions for ECVOPRF with P-384 make it such that you get below 192-bit of security, so is it warranted to require SHA-512 over SHA-384?",
       "createdAt": "2021-09-10T16:06:55Z",
-      "updatedAt": "2021-09-10T16:06:55Z",
+      "updatedAt": "2021-09-13T15:17:41Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This was done for alignment with the corresponding hash-to-curve suite, which uses SHA-512 with P-384. It's probably reasonable to update that suite, since SHA-384 meets the criteria needed for a 192-bit level. @kwantam, I'm not aware of any existing uses of the `P384_XMD:SHA-512_SSWU_RO_` suite, so perhaps we can just update this in both places?",
+          "createdAt": "2021-09-13T13:51:59Z",
+          "updatedAt": "2021-09-13T13:51:59Z"
+        },
+        {
+          "author": "jedisct1",
+          "authorAssociation": "NONE",
+          "body": "Certainly not a bad change to make now, before applications start using P-384 with SHA-512.",
+          "createdAt": "2021-09-13T14:31:00Z",
+          "updatedAt": "2021-09-13T14:31:00Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "NONE",
+          "body": "My vote would be to stick with SHA-512 rather than to move to SHA-384, for two reasons:\r\n\r\n- SHA-512 is, in general, much more widely deployed than SHA-384.\r\n- There's no speed advantage to SHA-384: it's just SHA-512 with a different IV and a truncated output.\r\n\r\nBut on the other hand, it looks like switching to SHA-384 in hash-to-curve doesn't really hurt anything---both of the P-384 suites end up using the same number of hash invocations in `expand_message` whether we use -384 or -512. And since it's apparently the case that P-384 is commonly paired with SHA-384, maybe SHA-512's general deployment level is beside the point.\r\n\r\nIn reality this is a pretty low-stakes decision given how infrequently P-384 is used; my recollection is that P-384 implementations tend to be slow.",
+          "createdAt": "2021-09-13T14:35:50Z",
+          "updatedAt": "2021-09-13T14:35:50Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "NONE",
+          "body": "One more thought, in favor of SHA-384: we switched the '25519 suites from SHA-256 to SHA-512 because that matches up well with EdDSA. So it stands to reason that we would also match up the P-384 suite with the existing signature standard.",
+          "createdAt": "2021-09-13T14:51:14Z",
+          "updatedAt": "2021-09-13T14:51:14Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Performance-wise, here's a quick benchmark of SHA-384 from BoringSSL:\r\n\r\n```\r\n\u2717 ./tool/bssl speed -filter SHA-384\r\nDid 2917000 SHA-384 (16 bytes) operations in 1000173us (2916495.4 ops/sec): 46.7 MB/s\r\nDid 1318000 SHA-384 (256 bytes) operations in 1000514us (1317322.9 ops/sec): 337.2 MB/s\r\nDid 402000 SHA-384 (1350 bytes) operations in 1001386us (401443.6 ops/sec): 541.9 MB/s\r\nDid 74000 SHA-384 (8192 bytes) operations in 1008212us (73397.3 ops/sec): 601.3 MB/s\r\nDid 40000 SHA-384 (16384 bytes) operations in 1018670us (39266.9 ops/sec): 643.3 MB/s\r\n```\r\n\r\nAnd here's SHA-512: \r\n\r\n```\r\n\u2717 ./tool/bssl speed -filter SHA-512\r\nDid 2704000 SHA-512 (16 bytes) operations in 1000117us (2703683.7 ops/sec): 43.3 MB/s\r\nDid 1342000 SHA-512 (256 bytes) operations in 1000413us (1341446.0 ops/sec): 343.4 MB/s\r\nDid 435000 SHA-512 (1350 bytes) operations in 1001122us (434512.5 ops/sec): 586.6 MB/s\r\nDid 80000 SHA-512 (8192 bytes) operations in 1008565us (79320.6 ops/sec): 649.8 MB/s\r\nDid 41000 SHA-512 (16384 bytes) operations in 1003932us (40839.4 ops/sec): 669.1 MB/s\r\n```\r\n\r\nSo there is a difference for larger inputs, but most things being hashed in this context are on the smaller end. @FredericJacobs, does this mostly align with your perceived performance differences?",
+          "createdAt": "2021-09-13T14:55:00Z",
+          "updatedAt": "2021-09-13T14:55:00Z"
+        },
+        {
+          "author": "kwantam",
+          "authorAssociation": "NONE",
+          "body": "The performance differences are almost certainly illusory. It is literally the same algorithm with different constants.",
+          "createdAt": "2021-09-13T15:17:01Z",
+          "updatedAt": "2021-09-13T15:17:01Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yep =) ",
+          "createdAt": "2021-09-13T15:17:41Z",
+          "updatedAt": "2021-09-13T15:17:41Z"
+        }
+      ]
+    },
+    {
+      "number": 267,
+      "id": "MDU6SXNzdWU5OTQxMDIzODM=",
+      "title": "Mismatch in test vectors for constants relating to metadata info",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/267",
+      "state": "CLOSED",
+      "author": "kevinlewi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There is a mismatch between how the test vectors are generated (https://github.com/cfrg/draft-irtf-cfrg-voprf/blob/master/poc/oprf.sage#L312) and what the current text says\r\n(https://github.com/cfrg/draft-irtf-cfrg-voprf/blame/master/draft-irtf-cfrg-voprf.md#L633) for handling the metadata info fields.\r\n\r\ncc: @chris-wood ",
+      "createdAt": "2021-09-12T08:50:16Z",
+      "updatedAt": "2021-09-13T16:45:10Z",
+      "closedAt": "2021-09-13T16:45:10Z",
+      "comments": []
+    },
+    {
+      "number": 269,
+      "id": "MDU6SXNzdWU5OTUwMTUxMjg=",
+      "title": "Mismatched labels between test vectors and spec",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/269",
+      "state": "CLOSED",
+      "author": "FredericJacobs",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Spec says the following for evaluate.\r\n\r\n```\r\ndef Evaluate(skS, blindedElement, info):\r\n  R = GG.DeserializeElement(blindedElement)\r\n  context = \"Context-\" || contextString ||\r\n            I2OSP(len(info), 2) || info\r\n```\r\n\r\nBut test vectors use an undefined Metadata tag that does not exist in the spec.\r\n\r\n```\r\n   def evaluate(self, blinded_element, info):\r\n        R = self.suite.group.deserialize(blinded_element)\r\n        metadataDST = _as_bytes(\"Metadata-\") + self.context_string\r\n        metadata_input = I2OSP(len(info), 2) + info \\\r\n            + I2OSP(len(metadataDST), 2) + metadataDST\r\n        t = self.suite.group.hash_to_scalar(metadata_input, self.scalar_domain_separation_tag())\r\n\r\n```",
+      "createdAt": "2021-09-13T15:13:28Z",
+      "updatedAt": "2021-09-13T16:46:33Z",
+      "closedAt": "2021-09-13T16:46:22Z",
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed in #268.",
+          "createdAt": "2021-09-13T16:46:33Z",
+          "updatedAt": "2021-09-13T16:46:33Z"
+        }
+      ]
+    },
+    {
+      "number": 270,
+      "id": "MDU6SXNzdWU5OTUwMTgyMDE=",
+      "title": "Test vectors do not use private key",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/270",
+      "state": "CLOSED",
+      "author": "FredericJacobs",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The sage implementation from the test vectors does not use the private key\r\n```\r\n   def evaluate(self, blinded_element, info):\r\n        R = self.suite.group.deserialize(blinded_element)\r\n        metadataDST = _as_bytes(\"Metadata-\") + self.context_string\r\n        metadata_input = I2OSP(len(info), 2) + info \\\r\n            + I2OSP(len(metadataDST), 2) + metadataDST\r\n        tag = self.suite.group.hash_to_scalar(metadata_input, self.scalar_domain_separation_tag())\r\n\r\n        t = self.skS + tag\r\n        tag_inv = inverse_mod(tag, self.suite.group.order())\r\n        Z = tag_inv * R\r\n```\r\n\r\nNote it takes the inverse of `tag` and not `t` like it should as defined by the spec.\r\n\r\n```\r\n  m = GG.HashToScalar(context)\r\n  t = skS + m\r\n  Z = (t^(-1)) * R\r\n```",
+      "createdAt": "2021-09-13T15:16:04Z",
+      "updatedAt": "2021-09-13T22:11:49Z",
+      "closedAt": "2021-09-13T22:11:49Z",
+      "comments": []
+    },
+    {
+      "number": 271,
+      "id": "MDU6SXNzdWU5OTUwMjI5MTg=",
+      "title": "Spec is missing reference to string encoding vector",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/271",
+      "state": "OPEN",
+      "author": "FredericJacobs",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I assume it would be ascii but the encoded string format is defined nowhere in the spec.",
+      "createdAt": "2021-09-13T15:20:16Z",
+      "updatedAt": "2021-09-13T17:05:16Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@FredericJacobs can you elaborate on this issue? I don't understand what's missing.",
+          "createdAt": "2021-09-13T16:44:32Z",
+          "updatedAt": "2021-09-13T16:44:32Z"
+        },
+        {
+          "author": "FredericJacobs",
+          "authorAssociation": "NONE",
+          "body": "The spec doesn't say what string encoding is expected for strings like \"Context-\" or \"Finalize-\"",
+          "createdAt": "2021-09-13T17:04:28Z",
+          "updatedAt": "2021-09-13T17:04:28Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Ah, gotcha. It's ASCII. I'll clarify.",
+          "createdAt": "2021-09-13T17:05:16Z",
+          "updatedAt": "2021-09-13T17:05:16Z"
+        }
+      ]
+    },
+    {
+      "number": 273,
+      "id": "MDU6SXNzdWU5OTUyOTAyNjk=",
+      "title": "Input -> Message?",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/273",
+      "state": "OPEN",
+      "author": "FredericJacobs",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "<img width=\"183\" alt=\"Screenshot 2021-09-10 at 18 41 04\" src=\"https://user-images.githubusercontent.com/400296/133150547-b7c3b9a5-4f37-4fcf-9fe1-274110b2ffa6.png\">\r\n\r\nThe above is quite confusing to take output as input. \r\n\r\nI'm not really liking the nomenclature of input and output for VOPRFs.\r\n\r\nHave you considered other names?\r\n\r\nFor input, I think `message` could work. For output, I think `evaluationResult` or something, but it might be difficult to not have the name clash with the evaluation function.",
+      "createdAt": "2021-09-13T20:22:19Z",
+      "updatedAt": "2021-09-13T22:25:04Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I'm not really liking the nomenclature of input and output for VOPRFs.\r\n\r\nThis is, at the end of the day, a PRF, which is just a function with inputs and outputs. We've not bikeshed the names of these yet.",
+          "createdAt": "2021-09-13T22:25:04Z",
+          "updatedAt": "2021-09-13T22:25:04Z"
+        }
+      ]
+    },
+    {
+      "number": 274,
+      "id": "MDU6SXNzdWU5OTUzODU5NjE=",
+      "title": "Out of order context strings: sage code vs. spec",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/274",
+      "state": "OPEN",
+      "author": "kevinlewi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The way the context is constructed in the sage code for the server's evaluate() function does not match the spec.\r\n\r\nSage code:\r\n\r\nhttps://github.com/cfrg/draft-irtf-cfrg-voprf/blob/master/poc/oprf.sage#L87-L89\r\n\r\nBut the spec says:\r\n\r\n  context = \"Context-\" || contextString ||\r\n            I2OSP(len(info), 2) || info\r\n\r\n\r\nI believe the sage code should be changed to read as:\r\n\r\n        context_DST = _as_bytes(\"Context-\") + self.context_string\r\n        context = context_DST + I2OSP(len(info), 2) + info\r\n\r\nThe same change also needs to be done to all of the functions that use the \"Context-\" string: Unblind/Finalize, also for the verifiable version.",
+      "createdAt": "2021-09-13T22:10:21Z",
+      "updatedAt": "2021-09-13T22:10:21Z",
       "closedAt": null,
       "comments": []
     }
@@ -19385,6 +19569,96 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 268,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzMyNzY4NTUx",
+      "title": "Caw/fix context string",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/268",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #267.\r\n\r\ncc @kevinlewi ",
+      "createdAt": "2021-09-13T13:49:18Z",
+      "updatedAt": "2021-09-13T16:45:10Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "33ef3665d25b27c1a4e9c706076f56a8d6cccaba",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/fix-context-string",
+      "headRefOid": "f0ce414badee33c046efe043e6fd3472ca853cce",
+      "closedAt": "2021-09-13T16:45:10Z",
+      "mergedAt": "2021-09-13T16:45:10Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "98932d7407f6867ffd0b83d84cc89e5879690420"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 272,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzMyOTI3NTc3",
+      "title": "Use the private key in the PoC",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/272",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #270.\r\n\r\ncc @fredericjacobs",
+      "createdAt": "2021-09-13T16:51:10Z",
+      "updatedAt": "2021-09-13T22:11:49Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "98932d7407f6867ffd0b83d84cc89e5879690420",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/use-sk",
+      "headRefOid": "badd3b4a30760ab9a649f249f950f52a65fb8d32",
+      "closedAt": "2021-09-13T22:11:49Z",
+      "mergedAt": "2021-09-13T22:11:49Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "bc4f9b6d661c964ba8ce6703fa5e4f1859e1ea12"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 275,
+      "id": "MDExOlB1bGxSZXF1ZXN0NzMzMTYwMDQ4",
+      "title": "Swap order ",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/275",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #274.",
+      "createdAt": "2021-09-13T22:15:52Z",
+      "updatedAt": "2021-09-13T22:34:52Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "bc4f9b6d661c964ba8ce6703fa5e4f1859e1ea12",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/swap-order",
+      "headRefOid": "2d5fbdfacd5fd3d51d55744e49939d5616e516a5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "kevinlewi",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks! Verified that this matches with ristretto255-sha512 in base mode.",
+          "createdAt": "2021-09-13T22:34:51Z",
+          "updatedAt": "2021-09-13T22:34:51Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
