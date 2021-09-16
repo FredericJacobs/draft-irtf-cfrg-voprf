@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-14T00:39:42.122675+00:00",
+  "timestamp": "2021-09-16T00:39:15.356410+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3960,15 +3960,31 @@
       "id": "MDU6SXNzdWU5OTUzODU5NjE=",
       "title": "Out of order context strings: sage code vs. spec",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/274",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "kevinlewi",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The way the context is constructed in the sage code for the server's evaluate() function does not match the spec.\r\n\r\nSage code:\r\n\r\nhttps://github.com/cfrg/draft-irtf-cfrg-voprf/blob/master/poc/oprf.sage#L87-L89\r\n\r\nBut the spec says:\r\n\r\n  context = \"Context-\" || contextString ||\r\n            I2OSP(len(info), 2) || info\r\n\r\n\r\nI believe the sage code should be changed to read as:\r\n\r\n        context_DST = _as_bytes(\"Context-\") + self.context_string\r\n        context = context_DST + I2OSP(len(info), 2) + info\r\n\r\nThe same change also needs to be done to all of the functions that use the \"Context-\" string: Unblind/Finalize, also for the verifiable version.",
       "createdAt": "2021-09-13T22:10:21Z",
-      "updatedAt": "2021-09-13T22:10:21Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-14T18:52:36Z",
+      "closedAt": "2021-09-14T18:52:36Z",
+      "comments": []
+    },
+    {
+      "number": 276,
+      "id": "I_kwDOBphpts47VfN0",
+      "title": "Test vectors missing \"EvaluationProofR\"",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/276",
+      "state": "CLOSED",
+      "author": "kevinlewi",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Right now, in verifiable mode, the proof outputs two scalars \u201cc\u201d and \u201cs\u201d. However, a random \u201cr\u201d is sampled, but this \u201cr\u201d value is not displayed in the test vectors. I think we need to add one more line here: https://github.com/cfrg/draft-irtf-cfrg-voprf/blob/master/poc/test_oprf.sage#L188-L189 to also display \u201cr\u201d.",
+      "createdAt": "2021-09-14T01:29:20Z",
+      "updatedAt": "2021-09-15T14:15:01Z",
+      "closedAt": "2021-09-15T14:15:01Z",
       "comments": []
     }
   ],
@@ -19631,24 +19647,26 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NzMzMTYwMDQ4",
       "title": "Swap order ",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/275",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #274.",
       "createdAt": "2021-09-13T22:15:52Z",
-      "updatedAt": "2021-09-13T22:34:52Z",
+      "updatedAt": "2021-09-14T18:52:36Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "bc4f9b6d661c964ba8ce6703fa5e4f1859e1ea12",
       "headRepository": "cfrg/draft-irtf-cfrg-voprf",
       "headRefName": "caw/swap-order",
       "headRefOid": "2d5fbdfacd5fd3d51d55744e49939d5616e516a5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-14T18:52:36Z",
+      "mergedAt": "2021-09-14T18:52:36Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "ff278f66d10b5d826eae55add447c8f7dda75038"
+      },
       "comments": [
         {
           "author": "kevinlewi",
@@ -19659,6 +19677,48 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 277,
+      "id": "PR_kwDOBphpts4rv089",
+      "title": "Serialize proof test vector as sequence of scalars",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/277",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #276.",
+      "createdAt": "2021-09-14T19:14:20Z",
+      "updatedAt": "2021-09-15T14:15:01Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "ff278f66d10b5d826eae55add447c8f7dda75038",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/update-proof-vector",
+      "headRefOid": "aa813333ba50954743aec6ea391bfe026cf18862",
+      "closedAt": "2021-09-15T14:15:01Z",
+      "mergedAt": "2021-09-15T14:15:01Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "f12aa2dc86e1d43983c405f179abc82b94ab4820"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOBphpts4s-ZrN",
+          "commit": {
+            "abbreviatedOid": "408a783"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-15T00:11:27Z",
+          "updatedAt": "2021-09-15T00:11:27Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
