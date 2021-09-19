@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-16T00:39:15.356410+00:00",
+  "timestamp": "2021-09-19T00:38:34.281840+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3898,15 +3898,15 @@
       "id": "MDU6SXNzdWU5OTUwMjI5MTg=",
       "title": "Spec is missing reference to string encoding vector",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/271",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "FredericJacobs",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I assume it would be ascii but the encoded string format is defined nowhere in the spec.",
       "createdAt": "2021-09-13T15:20:16Z",
-      "updatedAt": "2021-09-13T17:05:16Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-18T13:15:36Z",
+      "closedAt": "2021-09-18T13:15:36Z",
       "comments": [
         {
           "author": "chris-wood",
@@ -19716,6 +19716,88 @@
           "body": "",
           "createdAt": "2021-09-15T00:11:27Z",
           "updatedAt": "2021-09-15T00:11:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 278,
+      "id": "PR_kwDOBphpts4r6ROs",
+      "title": "Clarify string value encoding.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/278",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #271.",
+      "createdAt": "2021-09-17T21:52:38Z",
+      "updatedAt": "2021-09-18T13:15:37Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "f12aa2dc86e1d43983c405f179abc82b94ab4820",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/string-literals",
+      "headRefOid": "8a3b688792809e6eddefee4b00e2295f3c28e714",
+      "closedAt": "2021-09-18T13:15:37Z",
+      "mergedAt": "2021-09-18T13:15:36Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "6e1cce1c99073050775841dc28992f12f4e3f32a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOBphpts4tLRrq",
+          "commit": {
+            "abbreviatedOid": "8a3b688"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-18T01:00:55Z",
+          "updatedAt": "2021-09-18T01:00:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 279,
+      "id": "PR_kwDOBphpts4r6TA4",
+      "title": "Update P-384 suite to use SHA-384.",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/279",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #266.",
+      "createdAt": "2021-09-17T22:11:12Z",
+      "updatedAt": "2021-09-18T01:03:41Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "f12aa2dc86e1d43983c405f179abc82b94ab4820",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/update-p384-suite",
+      "headRefOid": "abb6880575f5d94065ae9602685f94ce5e4fe6f3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOBphpts4tLRw0",
+          "commit": {
+            "abbreviatedOid": "abb6880"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-09-18T01:03:41Z",
+          "updatedAt": "2021-09-18T01:03:41Z",
           "comments": []
         }
       ]
