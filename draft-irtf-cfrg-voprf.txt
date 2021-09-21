@@ -5,10 +5,10 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                                            Brave Software
 Intended status: Informational                          A. Faz-Hernandez
-Expires: 24 March 2022                                       N. Sullivan
+Expires: 25 March 2022                                       N. Sullivan
                                                                C.A. Wood
                                                               Cloudflare
-                                                       20 September 2021
+                                                       21 September 2021
 
 
    Oblivious Pseudorandom Functions (OPRFs) using Prime-Order Groups
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 March 2022.
+   This Internet-Draft will expire on 25 March 2022.
 
 Copyright Notice
 
