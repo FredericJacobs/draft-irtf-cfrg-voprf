@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-19T00:38:34.281840+00:00",
+  "timestamp": "2021-09-21T00:38:56.202544+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3776,15 +3776,15 @@
       "id": "MDU6SXNzdWU5OTMzNzUxOTc=",
       "title": "OPRF(P-384, SHA-512) vs OPRF(P-384, SHA-384)",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/266",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "FredericJacobs",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Is there a compelling reason to use SHA-512 with P-384 as opposed to matching P-384 with SHA-384 like is commonly done for ECDSA signatures for instance? The number theoretical assumptions for ECVOPRF with P-384 make it such that you get below 192-bit of security, so is it warranted to require SHA-512 over SHA-384?",
       "createdAt": "2021-09-10T16:06:55Z",
-      "updatedAt": "2021-09-13T15:17:41Z",
-      "closedAt": null,
+      "updatedAt": "2021-09-20T14:11:48Z",
+      "closedAt": "2021-09-20T14:11:48Z",
       "comments": [
         {
           "author": "chris-wood",
@@ -19767,24 +19767,26 @@
       "id": "PR_kwDOBphpts4r6TA4",
       "title": "Update P-384 suite to use SHA-384.",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/279",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #266.",
       "createdAt": "2021-09-17T22:11:12Z",
-      "updatedAt": "2021-09-18T01:03:41Z",
+      "updatedAt": "2021-09-20T14:11:48Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "f12aa2dc86e1d43983c405f179abc82b94ab4820",
       "headRepository": "cfrg/draft-irtf-cfrg-voprf",
       "headRefName": "caw/update-p384-suite",
       "headRefOid": "abb6880575f5d94065ae9602685f94ce5e4fe6f3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-09-20T14:11:48Z",
+      "mergedAt": "2021-09-20T14:11:48Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "9fd1db1888ecce632b3248e86399cb8a37fac80a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -19798,6 +19800,48 @@
           "body": "",
           "createdAt": "2021-09-18T01:03:41Z",
           "updatedAt": "2021-09-18T01:03:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 280,
+      "id": "PR_kwDOBphpts4r-L6r",
+      "title": "Fix hash-to-curve DST for all NIST curves",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/280",
+      "state": "MERGED",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #279.",
+      "createdAt": "2021-09-20T16:07:47Z",
+      "updatedAt": "2021-09-20T19:14:34Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "9fd1db1888ecce632b3248e86399cb8a37fac80a",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/fix-h2c-vectors",
+      "headRefOid": "3805702a4b26637cfb9af3427db52917271bf6eb",
+      "closedAt": "2021-09-20T19:14:33Z",
+      "mergedAt": "2021-09-20T19:14:33Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "2b1043ce7b39dce3bb3de92469d36d3cdd6e61e7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOBphpts4tPV7r",
+          "commit": {
+            "abbreviatedOid": "7ac75d1"
+          },
+          "author": "armfazh",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "good catch",
+          "createdAt": "2021-09-20T19:04:06Z",
+          "updatedAt": "2021-09-20T19:04:06Z",
           "comments": []
         }
       ]
