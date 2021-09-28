@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-21T00:38:56.202544+00:00",
+  "timestamp": "2021-09-28T00:38:52.799250+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3985,6 +3985,22 @@
       "createdAt": "2021-09-14T01:29:20Z",
       "updatedAt": "2021-09-15T14:15:01Z",
       "closedAt": "2021-09-15T14:15:01Z",
+      "comments": []
+    },
+    {
+      "number": 281,
+      "id": "I_kwDOBphpts48F03C",
+      "title": "Generalized H3",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/281",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It's possible to extend the POPRF design to build a puncturable variant (in the metadata), a la [STAR](https://arxiv.org/pdf/2109.10074.pdf). Currently, the POPRF abstraction does not allow this to be done so easily. We could probably accommodate it by allowing servers to specify H3, the HashToScalar function used for computing the evaluation context. @alxdavids, thoughts?",
+      "createdAt": "2021-09-27T13:33:55Z",
+      "updatedAt": "2021-09-27T13:33:55Z",
+      "closedAt": null,
       "comments": []
     }
   ],
