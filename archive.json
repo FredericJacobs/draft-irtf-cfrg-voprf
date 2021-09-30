@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-28T00:38:52.799250+00:00",
+  "timestamp": "2021-09-30T00:43:03.494337+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -3992,14 +3992,45 @@
       "id": "I_kwDOBphpts48F03C",
       "title": "Generalized H3",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/281",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It's possible to extend the POPRF design to build a puncturable variant (in the metadata), a la [STAR](https://arxiv.org/pdf/2109.10074.pdf). Currently, the POPRF abstraction does not allow this to be done so easily. We could probably accommodate it by allowing servers to specify H3, the HashToScalar function used for computing the evaluation context. @alxdavids, thoughts?",
       "createdAt": "2021-09-27T13:33:55Z",
-      "updatedAt": "2021-09-27T13:33:55Z",
+      "updatedAt": "2021-09-28T12:40:48Z",
+      "closedAt": "2021-09-28T12:40:48Z",
+      "comments": [
+        {
+          "author": "alxdavids",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this could be useful. Would the choice of H3 be completely open, or would there would be a set of potential choices? I only ask because the puncturable version requires a non-standard usage of an unstandardised PRF, and I was wondering if this is the sort of thing that we'd want to allow in general?",
+          "createdAt": "2021-09-28T08:56:56Z",
+          "updatedAt": "2021-09-28T09:39:23Z"
+        },
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If anything, I imagine it would be fixed (in this doc) to reasonable choices, namely, random oracles. Though, now that I think more about it, it's not unreasonable to just specify elsewhere how `info` is computed on client and server using the PRF, and then how the result is passed into the existing APIs. So nothing probably needs to happen here. Closing!",
+          "createdAt": "2021-09-28T12:40:48Z",
+          "updatedAt": "2021-09-28T12:40:48Z"
+        }
+      ]
+    },
+    {
+      "number": 282,
+      "id": "I_kwDOBphpts48MqB4",
+      "title": "Update version context string and change log",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/282",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This will also update the test vectors.",
+      "createdAt": "2021-09-28T16:15:42Z",
+      "updatedAt": "2021-09-28T16:15:42Z",
       "closedAt": null,
       "comments": []
     }
@@ -19861,6 +19892,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 284,
+      "id": "PR_kwDOBphpts4sefYd",
+      "title": "Focus the document on the POPRF construction and its properties",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/284",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There's still some other editorial changes I'd like to make, like using single-letter variable names for scalars in all operations consistently, but this is just a start. \r\n\r\ncc @nirvantyagi for \ud83d\udc40 on the updated security consideration section near the end",
+      "createdAt": "2021-09-29T22:44:22Z",
+      "updatedAt": "2021-09-29T22:44:27Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "56dc5dfe922686462b34f7089adc3877ec57f0b8",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "caw/focus-poprf",
+      "headRefOid": "9460f7adeba4a04f9432c83e96eb274ed6ba299a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
