@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-09-30T00:43:03.494337+00:00",
+  "timestamp": "2021-10-03T00:42:59.164233+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -4033,6 +4033,30 @@
       "updatedAt": "2021-09-28T16:15:42Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 285,
+      "id": "I_kwDOBphpts48V1p9",
+      "title": "Update test vectors for OPRF(P-384, SHA-384)",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/285",
+      "state": "CLOSED",
+      "author": "FredericJacobs",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Current test vectors use SHA-512",
+      "createdAt": "2021-09-30T16:02:52Z",
+      "updatedAt": "2021-09-30T16:03:19Z",
+      "closedAt": "2021-09-30T16:03:19Z",
+      "comments": [
+        {
+          "author": "FredericJacobs",
+          "authorAssociation": "NONE",
+          "body": "Nevermind. Didn't pull the latest",
+          "createdAt": "2021-09-30T16:03:19Z",
+          "updatedAt": "2021-09-30T16:03:19Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -19905,13 +19929,72 @@
       "labels": [],
       "body": "There's still some other editorial changes I'd like to make, like using single-letter variable names for scalars in all operations consistently, but this is just a start. \r\n\r\ncc @nirvantyagi for \ud83d\udc40 on the updated security consideration section near the end",
       "createdAt": "2021-09-29T22:44:22Z",
-      "updatedAt": "2021-09-29T22:44:27Z",
+      "updatedAt": "2021-10-01T01:01:55Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "56dc5dfe922686462b34f7089adc3877ec57f0b8",
       "headRepository": "cfrg/draft-irtf-cfrg-voprf",
       "headRefName": "caw/focus-poprf",
       "headRefOid": "9460f7adeba4a04f9432c83e96eb274ed6ba299a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOBphpts4tzcxq",
+          "commit": {
+            "abbreviatedOid": "9460f7a"
+          },
+          "author": "nirvantyagi",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Looks good! I made a comment regarding whether you want to describe the state q-Strong DH problem or the q-DL problem.",
+          "createdAt": "2021-09-30T23:57:23Z",
+          "updatedAt": "2021-10-01T01:01:55Z",
+          "comments": [
+            {
+              "originalPosition": 485,
+              "body": "In the context of oblivious PRFs, we also require that the output appear pseudorandom even when the adversary has access to a blind evaluation oracle.",
+              "createdAt": "2021-09-30T23:57:23Z",
+              "updatedAt": "2021-10-01T01:01:55Z"
+            },
+            {
+              "originalPosition": 572,
+              "body": "(namely, the pseudorandomness property)",
+              "createdAt": "2021-10-01T00:00:16Z",
+              "updatedAt": "2021-10-01T01:01:55Z"
+            },
+            {
+              "originalPosition": 620,
+              "body": "I'm not sure how precise you want to be here. The Q-Strong-DH problem as stated by BB04 isn't directly applicable to 3HashSDHI. You might rename this section to \"Static q-DL Assumption\" and say something like this:\r\n\r\nA side-effect of the POPRF design is that it allows instantiation of an oracle for retrieving \"strong-DH\" evaluations, in which an adversary can query a group element B and scalar c, and receive evaluation output 1/(k+c)*B. This type of oracle allows an adversary to form elements of \"repeated powers\" of the server-side secret. This \"repeated powers\" structure has been studied in terms of the q-DL problem which asks the following:\r\n\r\n~~~\r\nGiven G1, G2, h*G2, (h^2)*G2, ..., (h^Q)*G2; for G1 and G2 generators of GG.\r\n    Output h where h is an element of GF(p)\r\n~~~\r\n\r\nFor example, consider an adversary that queries the strong-DH oracle provided by the POPRF on a fixed scalar c starting with group element G2, then passes the received evaluation group element back as input for the next evaluation. If we set h = 1/(k+c), such an adversary would receive exactly the evaluations given in the q-DL problem: h*G2, (h^2)*G2, ..., (h^Q)*G2.\r\n\r\n{{TCRSTW21}} capture the power of the strong-DH oracle in the One-More Gap SDHI assumption and show, in the algebraic group model, the security of this assumption can be reduced to the security of the q-DL problem, where q is the number of queries made to the blind evaluation oracle.\r\n\r\nThe q-DL assumption has been well studied in the literature, and there exist a number of cryptanalytic studies to inform parameter choice and group instantiation (for example, {{BG04}} and {{Cheon06}}).   ...continue with what is written about parameter selection.",
+              "createdAt": "2021-10-01T00:59:57Z",
+              "updatedAt": "2021-10-01T01:01:55Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 286,
+      "id": "PR_kwDOBphpts4shzMh",
+      "title": "Add Novi's VOPRF crate",
+      "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/286",
+      "state": "OPEN",
+      "author": "chris-wood",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "cc @kevinlewi ",
+      "createdAt": "2021-09-30T21:16:30Z",
+      "updatedAt": "2021-09-30T21:16:30Z",
+      "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "baseRefName": "master",
+      "baseRefOid": "56dc5dfe922686462b34f7089adc3877ec57f0b8",
+      "headRepository": "cfrg/draft-irtf-cfrg-voprf",
+      "headRefName": "add-novi-voprf",
+      "headRefOid": "792e0e589c1987f0c04407a4ae52727aeb8f45c3",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
