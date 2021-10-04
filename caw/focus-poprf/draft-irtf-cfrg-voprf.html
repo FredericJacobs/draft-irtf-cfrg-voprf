@@ -1031,11 +1031,11 @@ address div.right {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">OPRFs</td>
-<td class="right">September 2021</td>
+<td class="right">October 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Davidson, et al.</td>
-<td class="center">Expires 2 April 2022</td>
+<td class="center">Expires 7 April 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ address div.right {
 <dd class="internet-draft">draft-irtf-cfrg-voprf-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-09-29" class="published">29 September 2021</time>
+<time datetime="2021-10-04" class="published">4 October 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-04-02">2 April 2022</time></dd>
+<dd class="expires"><time datetime="2022-04-07">7 April 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1118,7 +1118,7 @@ standard prime-order groups, including elliptic curves.<a href="#section-abstrac
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 April 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 April 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1241,7 +1241,7 @@ standard prime-order groups, including elliptic curves.<a href="#section-abstrac
                     <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-protocol-security-and-compu" class="xref">Protocol Security and Computational Hardness Assumptions</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
-                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-static-diffie-hellman-oracl" class="xref">Static Diffie-Hellman Oracle</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-static-q-dl-assumption" class="xref">Static q-DL Assumption</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
                     <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="xref">6.2.3</a>.  <a href="#name-implications-for-ciphersuit" class="xref">Implications for Ciphersuite Choices</a></p>
@@ -2701,45 +2701,30 @@ evaluate the 2HashDH-NIZK construction from <span>[<a href="#JKK14" class="xref"
 to the design in this specification.)<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="qsdh">
+<div id="static-q-dl-assumption">
 <section id="section-6.2.2">
-          <h4 id="name-static-diffie-hellman-oracl">
-<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-static-diffie-hellman-oracl" class="section-name selfRef">Static Diffie-Hellman Oracle</a>
+          <h4 id="name-static-q-dl-assumption">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-static-q-dl-assumption" class="section-name selfRef">Static q-DL Assumption</a>
           </h4>
-<p id="section-6.2.2-1">A side-effect of the POPRF design is that it allows instantiation of a
-oracle for constructing Q-strong-DH (Q-sDH) samples. The Q-Strong-DH
-problem asks the following.<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.2-2">
-<pre>
-    Given G1, G2, h*G2, (h^2)*G2, ..., (h^Q)*G2; for G1 and G2
-    generators of GG.
-
-    Output ( (1/(k+c))*G1, c ) where c is an element of GF(p)
-</pre><a href="#section-6.2.2-2" class="pilcrow">¶</a>
-</div>
-<p id="section-6.2.2-3">The assumption that this problem is hard was first introduced in
-<span>[<a href="#BB04" class="xref">BB04</a>]</span>. Since then, there have been a number of cryptanalytic studies
-that have reduced the security of the assumption below that implied by
-the group instantiation (for example, <span>[<a href="#BG04" class="xref">BG04</a>]</span> and <span>[<a href="#Cheon06" class="xref">Cheon06</a>]</span>). In
-summary, the attacks reduce the security of the group instantiation by
-log_2(Q)/2 bits. Note that the attacks only work in situations where Q
-divides p-1 or p+1, where p is the order of the prime-order group used
-to instantiate the OPRF.<a href="#section-6.2.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-4">As an example, suppose that a group instantiation is used that provides
-128 bits of security against discrete log cryptanalysis. Then an
-adversary with access to a Q-sDH oracle and makes Q=2^20 queries can
-reduce the security of the instantiation by log_2(2^20)/2 = 10 bits.
-Launching an attack would require 2^(p/2-log_2(Q)/2) bits of memory.<a href="#section-6.2.2-4" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-5">Notice that it is easy to instantiate a Q-sDH oracle using the OPRF
-functionality that we provide. A client can just submit sequential
-queries of the form (G, k * G, (k^2)G, ..., (k^(Q-1))G), where each
-query is the output of the previous interaction. This means that any
-client that submits Q queries to the POPRF can use the aforementioned
-attacks to reduce the security of the group instantiation by
-(log_2(Q)/2) bits.<a href="#section-6.2.2-5" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-6">Recall that from a malicious client's perspective, the adversary wins if
-they can distinguish the POPRF interaction from a protocol that computes
-the ideal functionality provided by the PRF.<a href="#section-6.2.2-6" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-1">A side-effect of the POPRF design is that it allows instantiation of an oracle for
+retrieving "strong-DH" evaluations, in which an adversary can query a group element
+B and scalar c, and receive evaluation output 1/(k+c)*B. This type of oracle allows
+an adversary to form elements of "repeated powers" of the server-side secret. This
+"repeated powers" structure has been studied in terms of the q-DL problem which
+asks the following: Given G1, G2, h*G2, (h^2)*G2, ..., (h^Q)*G2; for G1 and G2
+generators of GG. Output h where h is an element of GF(p)<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">For example, consider an adversary that queries the strong-DH oracle provided by the
+POPRF on a fixed scalar c starting with group element G2, then passes the received
+evaluation group element back as input for the next evaluation. If we set h = 1/(k+c),
+such an adversary would receive exactly the evaluations given in the q-DL problem: h*G2,
+(h^2)*G2, ..., (h^Q)*G2.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-3"><span>[<a href="#TCRSTW21" class="xref">TCRSTW21</a>]</span> capture the power of the strong-DH oracle in the One-More Gap SDHI assumption
+and show, in the algebraic group model, the security of this assumption can be reduced to
+the security of the q-DL problem, where q is the number of queries made to the blind
+evaluation oracle.<a href="#section-6.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-4">The q-DL assumption has been well studied in the literature, and there exist a number of
+cryptanalytic studies to inform parameter choice and group instantiation (for example,
+<span>[<a href="#BG04" class="xref">BG04</a>]</span> and <span>[<a href="#Cheon06" class="xref">Cheon06</a>]</span>).<a href="#section-6.2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="implications-for-ciphersuite-choices">
