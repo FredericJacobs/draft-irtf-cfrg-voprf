@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-10-03T00:42:59.164233+00:00",
+  "timestamp": "2021-10-05T00:39:28.557635+00:00",
   "repo": "cfrg/draft-irtf-cfrg-voprf",
   "labels": [
     {
@@ -19929,18 +19929,26 @@
       "labels": [],
       "body": "There's still some other editorial changes I'd like to make, like using single-letter variable names for scalars in all operations consistently, but this is just a start. \r\n\r\ncc @nirvantyagi for \ud83d\udc40 on the updated security consideration section near the end",
       "createdAt": "2021-09-29T22:44:22Z",
-      "updatedAt": "2021-10-01T01:01:55Z",
+      "updatedAt": "2021-10-04T19:26:23Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "56dc5dfe922686462b34f7089adc3877ec57f0b8",
       "headRepository": "cfrg/draft-irtf-cfrg-voprf",
       "headRefName": "caw/focus-poprf",
-      "headRefOid": "9460f7adeba4a04f9432c83e96eb274ed6ba299a",
+      "headRefOid": "f613177863ab70c8efd0a8a314ed454c0d8524a3",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@alxdavids, @armfazh: please review!",
+          "createdAt": "2021-10-04T19:26:23Z",
+          "updatedAt": "2021-10-04T19:26:23Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOBphpts4tzcxq",
@@ -19973,6 +19981,32 @@
               "updatedAt": "2021-10-01T01:01:55Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOBphpts4t66KS",
+          "commit": {
+            "abbreviatedOid": "9460f7a"
+          },
+          "author": "chris-wood",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2021-10-04T15:01:28Z",
+          "updatedAt": "2021-10-04T16:18:37Z",
+          "comments": [
+            {
+              "originalPosition": 485,
+              "body": "I wonder if that's a bit too precise for this? ",
+              "createdAt": "2021-10-04T15:01:28Z",
+              "updatedAt": "2021-10-04T16:18:37Z"
+            },
+            {
+              "originalPosition": 620,
+              "body": "Great suggestion! I'll weave it in.",
+              "createdAt": "2021-10-04T15:02:12Z",
+              "updatedAt": "2021-10-04T16:18:37Z"
+            }
+          ]
         }
       ]
     },
@@ -19981,24 +20015,26 @@
       "id": "PR_kwDOBphpts4shzMh",
       "title": "Add Novi's VOPRF crate",
       "url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/286",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "chris-wood",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "cc @kevinlewi ",
       "createdAt": "2021-09-30T21:16:30Z",
-      "updatedAt": "2021-09-30T21:16:30Z",
+      "updatedAt": "2021-10-04T19:26:38Z",
       "baseRepository": "cfrg/draft-irtf-cfrg-voprf",
       "baseRefName": "master",
       "baseRefOid": "56dc5dfe922686462b34f7089adc3877ec57f0b8",
       "headRepository": "cfrg/draft-irtf-cfrg-voprf",
       "headRefName": "add-novi-voprf",
       "headRefOid": "792e0e589c1987f0c04407a4ae52727aeb8f45c3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2021-10-04T19:26:38Z",
+      "mergedAt": "2021-10-04T19:26:38Z",
+      "mergedBy": "chris-wood",
+      "mergeCommit": {
+        "oid": "28800c417c97b83a82b81bdb403acd25d56bcba8"
+      },
       "comments": [],
       "reviews": []
     }
